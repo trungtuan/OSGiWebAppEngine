@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet-mapping>
+        <servlet-name>Main Servlet</servlet-name>
+        <url-pattern>/MainServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <listener>
+        <listener-class>com.mycompany.osgiwebfelix.StartupListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.apache.felix.http.proxy.ProxyListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>proxy</servlet-name>
+        <servlet-class>org.apache.felix.http.proxy.ProxyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Main Servlet</servlet-name>
+        <servlet-class>com.mycompany.osgiwebfelix.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>proxy</servlet-name>
+        <url-pattern>/module/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>A Test Servlet</servlet-name>
+        <servlet-class>com.mycompany.osgiwebfelix.ATestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>A Test Servlet</servlet-name>
+        <url-pattern>/test/*</url-pattern>
+    </servlet-mapping>
+</web-app>
